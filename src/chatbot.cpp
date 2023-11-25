@@ -2,6 +2,7 @@
 #include <random>
 #include <algorithm>
 #include <ctime>
+#include <cstring>
 
 #include "chatlogic.h"
 #include "graphnode.h"
@@ -44,7 +45,55 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+// ChatBot::ChatBot(const ChatBot& other) // copy constructor
+// {
+//     std::cout << "ChatBot Copy Constructor" << std::endl;
+//     if (this != &other)
+//     {
+//         *this = other;
+//     }
+// }
 
+ChatBot::ChatBot(ChatBot&& other) // move constructor
+{
+    std::cout << "ChatBot Move Constructor" << std::endl;
+    if (this != &other)
+    {
+        this->_image = other._image;
+        this->_chatLogic = other._chatLogic;
+        this->_rootNode = other._rootNode;
+        this->_currentNode = other._currentNode;
+        other._image = nullptr;
+    }
+}
+
+// ChatBot& ChatBot::operator=(const ChatBot& other) // copy assignment
+// {
+//     std::cout << "ChatBot Copy Assignment" << std::endl;
+//     if (this != &other)
+//     {
+//         this->_image = new wxBitmap();
+//         *(this->_image) = *(other._image);
+//         this->_chatLogic = other._chatLogic;
+//         this->_rootNode = other._rootNode;
+//         this->_currentNode = other._currentNode;
+//     }
+//     return *this;
+// }
+
+ChatBot& ChatBot::operator=(ChatBot&& other) // move assignment
+{
+    std::cout << "ChatBot Move Assignment" << std::endl;
+    if (this != &other)
+    {
+        this->_image = other._image;
+        this->_chatLogic = other._chatLogic;
+        this->_rootNode = other._rootNode;
+        this->_currentNode = other._currentNode;
+        other._image = nullptr;
+    }
+    return *this;
+}
 ////
 //// EOF STUDENT CODE
 
